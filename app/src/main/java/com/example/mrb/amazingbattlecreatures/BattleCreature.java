@@ -6,17 +6,13 @@ package com.example.mrb.amazingbattlecreatures;
 public class BattleCreature
 {
     private String strName;
-    private int intHitPoints;
+    private int intHitPointsMaster;
+    private int intHitPoints; // Or perhaps it should be intHealthPoints?
     private int intDefenceRating;
     private int intOffenceRating;
     private boolean blnIsDefeated;
     private boolean blnHasWon;
-
-    //Moves?
-    //Special Moves
-    //Speed
-    //blnIsAlive
-
+    private String strLastAction;
 
     public BattleCreature(String strName_PARAM,
                                int intHitPoints_PARAM,
@@ -24,20 +20,32 @@ public class BattleCreature
                                int intOffenceRating_PARAM)
     {
         this.strName = strName_PARAM;
+
+        this.intHitPointsMaster = intHitPoints_PARAM; // Needed to restore hit points
         this.intHitPoints = intHitPoints_PARAM;
+
         this.intDefenceRating = intDefenceRating_PARAM;
         this.intOffenceRating = intOffenceRating_PARAM;
+
+        this.strLastAction = new String("");
     }
 
-    //Add an escape() method?
+    public void restore()
+    {
+        intHitPoints = intHitPointsMaster; // Reset Hit Points from Master
 
-    //Add a train() method
+        blnHasWon = false;
+        blnIsDefeated = false;
 
-    //Add a heal() method
+        strLastAction = "";
+    }
 
     public void attack(BattleCreature battcreatOpponent_PARAM)
     {
-        battcreatOpponent_PARAM.defend(intOffenceRating);
+        if (!battcreatOpponent_PARAM.isDefeated())
+        {
+            battcreatOpponent_PARAM.defend(intOffenceRating);
+        }
 
         if(battcreatOpponent_PARAM.isDefeated())
         {
@@ -51,20 +59,20 @@ public class BattleCreature
 
     public void defend(int intOffenceAmount_PARAM)
     {
-        if (intOffenceAmount_PARAM >= intHitPoints)
+        int intNetDamage = intOffenceAmount_PARAM - intDefenceRating;
+
+        if (intNetDamage >= intHitPoints)
         {
             intHitPoints = 0;
             blnIsDefeated = true;
-        }
-        else if (intOffenceAmount_PARAM > intDefenceRating)
-        {
-            intHitPoints = intHitPoints - (intOffenceAmount_PARAM - intDefenceRating);
-            blnIsDefeated = false;
+            blnHasWon = false;
+            strLastAction = strName + " is defeated.";
         }
         else
         {
-            // No change in intHitPoints
+            intHitPoints = intHitPoints - intNetDamage;
             blnIsDefeated = false;
+            strLastAction = strName + " has taken " + intNetDamage + " damage.";
         }
     }
 
@@ -73,15 +81,19 @@ public class BattleCreature
         return strName;
     }
 
-    public boolean isDefeated()
-    {
-        return blnIsDefeated;
-    }
-
     public boolean hasWon()
     {
         return blnHasWon;
     }
 
+    public boolean isDefeated()
+    {
+        return blnIsDefeated;
+    }
+
+    public String getLastAction()
+    {
+        return strLastAction;
+    }
 
 }
