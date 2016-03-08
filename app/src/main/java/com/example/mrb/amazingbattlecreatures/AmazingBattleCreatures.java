@@ -2,17 +2,22 @@ package com.example.mrb.amazingbattlecreatures;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.text.method.ScrollingMovementMethod;
 import android.widget.TextView;
 import android.view.View;
 
 public class AmazingBattleCreatures extends AppCompatActivity {
+
+    TextView txtvwBattleOutput;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_amazing_battle_creatures);
 
+        txtvwBattleOutput = (TextView) findViewById(R.id.txtvwBattleOutput);
+        // The line below allows the inside of the TextView to Scroll vertically
+        txtvwBattleOutput.setMovementMethod(new ScrollingMovementMethod());
     }
 
     public void duel(View vw)
@@ -24,32 +29,34 @@ public class AmazingBattleCreatures extends AppCompatActivity {
         BattleCreature bcOne;
         BattleCreature bcTwo;
 
-        bcOne = new BattleCreature("Mondoise", 100, 30, 10);
-        bcTwo = new BattleCreature("Tuesachu", 100, 40, 15);
+        // Thanks to Mr Hardman for checking the original numbers! These ones work better.
+        bcOne = new BattleCreature("Mondoise", 200, 10, 33);
+        bcTwo = new BattleCreature("Tuesachu", 200, 25, 15);
 
         bcOne.restore();
         bcTwo.restore();
 
+        txtvwBattleOutput.setText("");
+
         while(blnNoWinner)
         {
-            if(bcTwo.isDefeated() == false)
+            // Thanks to Mr Hardman for the logic assist!
+            if((bcTwo.isDefeated() == false) && (bcOne.isDefeated() == false))
             {
                 bcOne.attack(bcTwo);
-                Log.i("AmazingBattleCreatures", bcTwo.getLastAction());
+                txtvwBattleOutput.append(bcTwo.getLastAction());
                 blnFirstBCWins = bcOne.hasWon();
             }
-           if(bcOne.isDefeated() == false)
+           if((bcOne.isDefeated() == false) && (bcTwo.isDefeated() == false))
            {
                bcTwo.attack(bcOne);
-               Log.i("AmazingBattleCreatures", bcOne.getLastAction());
+               txtvwBattleOutput.append(bcOne.getLastAction());
                blnSecondBCWins = bcTwo.hasWon();
            }
 
             blnNoWinner = !blnFirstBCWins && !blnSecondBCWins;
         }
 
-        //Log.i("AmazingBattleCreatures", strbldrTotalResults.toString());
     }
-
 
 }
