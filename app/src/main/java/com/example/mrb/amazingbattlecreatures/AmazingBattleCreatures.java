@@ -31,7 +31,7 @@ public class AmazingBattleCreatures extends AppCompatActivity {
 
         // Thanks to Mr Hardman for checking the original numbers! These ones work better.
         bcOne = new BattleCreature("Mondoise", 200, 10, 33);
-        bcTwo = new BattleCreature("Tuesachu", 200, 25, 15);
+        bcTwo = new BattleCreature("Tuesachu", 200, 25, 100);
 
         bcOne.restore();
         bcTwo.restore();
