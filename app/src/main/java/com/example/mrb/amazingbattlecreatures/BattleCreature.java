@@ -45,6 +45,7 @@ public class BattleCreature
         if (!battcreatOpponent_PARAM.isDefeated())
         {
             battcreatOpponent_PARAM.defend(intOffenceRating);
+            strLastAction = this.strName + " delivers " + intOffenceRating + " attack\n";
         }
 
         if(battcreatOpponent_PARAM.isDefeated())
@@ -66,12 +67,12 @@ public class BattleCreature
             intHitPoints = 0;
             blnIsDefeated = true;
             blnHasWon = false;
-            strLastAction = strName + " is defeated.";
+            strLastAction = strName + " is defeated.\n";
         }
         else if (intNetDamage > 0)
         {
             intHitPoints = intHitPoints - intNetDamage;
-            strLastAction = strName + " has taken " + intNetDamage + " damage.";
+            strLastAction = strName + " has taken " + intNetDamage + " damage.\n";
         }
     }
 

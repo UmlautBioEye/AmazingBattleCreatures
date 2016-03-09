@@ -44,12 +44,14 @@ public class AmazingBattleCreatures extends AppCompatActivity {
             if((bcTwo.isDefeated() == false) && (bcOne.isDefeated() == false))
             {
                 bcOne.attack(bcTwo);
+                txtvwBattleOutput.append(bcOne.getLastAction());
                 txtvwBattleOutput.append(bcTwo.getLastAction());
                 blnFirstBCWins = bcOne.hasWon();
             }
            if((bcOne.isDefeated() == false) && (bcTwo.isDefeated() == false))
            {
                bcTwo.attack(bcOne);
+               txtvwBattleOutput.append(bcTwo.getLastAction());
                txtvwBattleOutput.append(bcOne.getLastAction());
                blnSecondBCWins = bcTwo.hasWon();
            }
