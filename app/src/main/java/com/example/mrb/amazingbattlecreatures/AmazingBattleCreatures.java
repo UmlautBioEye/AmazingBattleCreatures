@@ -27,31 +27,33 @@ public class AmazingBattleCreatures extends AppCompatActivity {
         boolean blnSecondBCWins = false;
 
         BattleCreature bcOne;
-        BattleCreature bcTwo;
+        CyberBattleCreature cbcTwo;
 
         // Thanks to Mr Hardman for checking the original numbers! These ones work better.
         bcOne = new BattleCreature("Mondoise", 200, 10, 33);
-        bcTwo = new BattleCreature("Tuesachu", 200, 25, 15);
+        cbcTwo = new CyberBattleCreature("Tuesachu", 200, 25, 15, 45);
 
         bcOne.restore();
-        bcTwo.restore();
+        cbcTwo.restore();
 
         txtvwBattleOutput.setText("");
 
         while(blnNoWinner)
         {
             // Thanks to Mr Hardman for the logic assist!
-            if((bcTwo.isDefeated() == false) && (bcOne.isDefeated() == false))
+            if((cbcTwo.isDefeated() == false) && (bcOne.isDefeated() == false))
             {
-                bcOne.attack(bcTwo);
-                txtvwBattleOutput.append(bcTwo.getLastAction());
+                bcOne.attack(cbcTwo);
+                txtvwBattleOutput.append(bcOne.getLastAction());
+                txtvwBattleOutput.append(cbcTwo.getLastAction());
                 blnFirstBCWins = bcOne.hasWon();
             }
-           if((bcOne.isDefeated() == false) && (bcTwo.isDefeated() == false))
+           if((bcOne.isDefeated() == false) && (cbcTwo.isDefeated() == false))
            {
-               bcTwo.attack(bcOne);
+               cbcTwo.cyberAttack(bcOne);
+               txtvwBattleOutput.append(cbcTwo.getLastAction());
                txtvwBattleOutput.append(bcOne.getLastAction());
-               blnSecondBCWins = bcTwo.hasWon();
+               blnSecondBCWins = cbcTwo.hasWon();
            }
 
             blnNoWinner = !blnFirstBCWins && !blnSecondBCWins;
