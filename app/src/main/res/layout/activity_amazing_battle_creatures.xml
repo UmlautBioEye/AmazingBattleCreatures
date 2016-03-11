@@ -14,8 +14,19 @@
         android:layout_height="wrap_content"
         android:text="Duel!"
         android:id="@+id/btnDuel"
-        android:layout_marginTop="90dp"
+        android:layout_marginTop="45dp"
+        android:onClick="duel"
         android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/txtvwBattleOutput"
+        android:layout_below="@+id/btnDuel"
         android:layout_centerHorizontal="true"
-        android:onClick="duel" />
+        android:scrollbars="vertical"
+        android:maxLines="20"/>
+
 </RelativeLayout>
