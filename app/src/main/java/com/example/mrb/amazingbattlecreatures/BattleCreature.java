@@ -5,14 +5,14 @@ package com.example.mrb.amazingbattlecreatures;
  */
 public class BattleCreature
 {
-    private String strName;
+    protected String strName;
     private int intHitPointsMaster;
     private int intHitPoints; // Or perhaps it should be intHealthPoints?
     private int intDefenceRating;
     private int intOffenceRating;
     private boolean blnIsDefeated;
-    private boolean blnHasWon;
-    private String strLastAction;
+    protected boolean blnHasWon;
+    protected String strLastAction;
 
     public BattleCreature(String strName_PARAM,
                                int intHitPoints_PARAM,
@@ -45,7 +45,7 @@ public class BattleCreature
         if (!battcreatOpponent_PARAM.isDefeated())
         {
             battcreatOpponent_PARAM.defend(intOffenceRating);
-            strLastAction = this.strName + " delivers " + intOffenceRating + " attack\n";
+            strLastAction = strName + " has delivered a " + intOffenceRating + " point attack!\n";
         }
 
         if(battcreatOpponent_PARAM.isDefeated())
@@ -95,5 +95,5 @@ public class BattleCreature
     {
         return strLastAction;
     }
-//
+
 }

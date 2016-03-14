@@ -27,33 +27,33 @@ public class AmazingBattleCreatures extends AppCompatActivity {
         boolean blnSecondBCWins = false;
 
         BattleCreature bcOne;
-        BattleCreature bcTwo;
+        AnimeRobot arTwo;
 
         // Thanks to Mr Hardman for checking the original numbers! These ones work better.
         bcOne = new BattleCreature("Mondoise", 200, 10, 33);
-        bcTwo = new BattleCreature("Tuesachu", 200, 25, 100);
+        arTwo = new AnimeRobot("Gun Dam", 500, 25, 15, 100);
 
         bcOne.restore();
-        bcTwo.restore();
+        arTwo.restore();
 
         txtvwBattleOutput.setText("");
 
         while(blnNoWinner)
         {
             // Thanks to Mr Hardman for the logic assist!
-            if((bcTwo.isDefeated() == false) && (bcOne.isDefeated() == false))
+            if ((arTwo.isDefeated() == false) && (bcOne.isDefeated() == false))
             {
-                bcOne.attack(bcTwo);
+                bcOne.attack(arTwo);
                 txtvwBattleOutput.append(bcOne.getLastAction());
-                txtvwBattleOutput.append(bcTwo.getLastAction());
+                txtvwBattleOutput.append(arTwo.getLastAction());
                 blnFirstBCWins = bcOne.hasWon();
             }
-           if((bcOne.isDefeated() == false) && (bcTwo.isDefeated() == false))
+           if((bcOne.isDefeated() == false) && (arTwo.isDefeated() == false))
            {
-               bcTwo.attack(bcOne);
-               txtvwBattleOutput.append(bcTwo.getLastAction());
+               arTwo.AnimeLaserAttack(bcOne);
+               txtvwBattleOutput.append(arTwo.getLastAction());
                txtvwBattleOutput.append(bcOne.getLastAction());
-               blnSecondBCWins = bcTwo.hasWon();
+               blnSecondBCWins = arTwo.hasWon();
            }
 
             blnNoWinner = !blnFirstBCWins && !blnSecondBCWins;
